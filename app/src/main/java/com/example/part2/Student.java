@@ -15,7 +15,10 @@ public class Student {
     @PrimaryKey(autoGenerate = true)
     public int studentId;
 
+    @NonNull
     public String name;
+
+    @NonNull
     public String email;
 
     @NonNull
@@ -30,19 +33,21 @@ public class Student {
         this.studentId = studentId;
     }
 
+    @NonNull
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@NonNull String name) {
         this.name = name;
     }
 
+    @NonNull
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(@NonNull String email) {
         this.email = email;
     }
 
