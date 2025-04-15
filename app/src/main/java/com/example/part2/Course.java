@@ -19,7 +19,10 @@ public class Course {
     @ColumnInfo(name = "course_code")
     public String courseCode;
 
+    @NonNull
     public String courseName;
+
+    @NonNull
     public String lecturerName;
 
     public int getCourseId() {
@@ -39,19 +42,21 @@ public class Course {
         this.courseCode = courseCode;
     }
 
+    @NonNull
     public String getCourseName() {
         return courseName;
     }
 
-    public void setCourseName(String courseName) {
+    public void setCourseName(@NonNull String courseName) {
         this.courseName = courseName;
     }
 
+    @NonNull
     public String getLecturerName() {
         return lecturerName;
     }
 
-    public void setLecturerName(String lecturerName) {
+    public void setLecturerName(@NonNull String lecturerName) {
         this.lecturerName = lecturerName;
     }
 }
