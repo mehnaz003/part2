@@ -30,4 +30,7 @@ public interface CourseDao {
 
     @Delete
     void deleteCourse(Course course);
+
+    @Query("DELETE FROM course_student WHERE courseId = :courseId")
+    void deleteEnrollmentsByCourseId(int courseId);
 }

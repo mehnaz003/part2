@@ -26,6 +26,13 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.courseRecyclerView);
         CourseListAdapter adapter = new CourseListAdapter(this);
+
+        adapter.setOnCourseLongClickListener(course -> {
+            courseViewModel.deleteCourse(course);
+            Toast.makeText(this, "Deleted course: " + course.getCourseCode(),
+                    Toast.LENGTH_SHORT).show();
+        });
+
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

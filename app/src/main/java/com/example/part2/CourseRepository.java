@@ -45,4 +45,10 @@ public class CourseRepository {
             courseDao.deleteCourse(course);
         });
     }
+
+    public void deleteEnrollmentsByCourseId(int courseId) {
+        SystemDB.databaseWriteExecutor.execute(() -> {
+            courseDao.deleteEnrollmentsByCourseId(courseId);
+        });
+    }
 }

@@ -34,6 +34,8 @@ public class CourseViewModel extends AndroidViewModel {
 
     public void deleteCourse(Course course) {
         courseRepository.deleteCourse(course);
+        int courseId = course.getCourseId();
+        courseRepository.deleteEnrollmentsByCourseId(courseId);
     }
 
     public void removeStudentFromCourse(int courseId, int studentId) {
@@ -43,4 +45,5 @@ public class CourseViewModel extends AndroidViewModel {
     public CourseWithStudents getCourseWithStudents(int courseId) {
         return courseRepository.getCourseWithStudents(courseId);
     }
+
 }
