@@ -19,9 +19,14 @@ public class CourseRepository {
         return courseDao.getAllCourses();
     }
 
-    public void insertCourse(Course course) {
+    public void insertCourse(Course course, CourseViewModel.InsertCallback callback) {
         SystemDB.databaseWriteExecutor.execute(() -> {
-            courseDao.insertCourse(course);
+            try {
+                courseDao.insertCourse(course);
+                callback.onSuccess();
+            } catch (Exception e) {
+                callback.onError(e);
+            }
         });
     }
 

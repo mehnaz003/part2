@@ -18,7 +18,7 @@ public interface CourseDao {
     @Query("SELECT * FROM courses")
     LiveData<List<Course>> getAllCourses();
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     void insertCourse(Course course);
 
     @Transaction
