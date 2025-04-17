@@ -12,33 +12,24 @@ import java.util.List;
 public class CourseViewModel extends AndroidViewModel {
 
     private final CourseRepository courseRepository;
-    private final MutableLiveData<List<Course>> allCourses = new MutableLiveData<>();
+    private final LiveData<List<Course>> allCourses;
 
     public CourseViewModel(@NonNull Application application) {
         super(application);
         courseRepository = new CourseRepository(application);
-        loadCourses();
+        allCourses = courseRepository.getAllCourses();
     }
 
     public LiveData<List<Course>> getAllCourses() {
         return allCourses;
     }
 
-    private void loadCourses() {
-        SystemDB.databaseWriteExecutor.execute(() -> {
-            List<Course> courseList = courseRepository.getAllCourses();
-            allCourses.postValue(courseList);
-        });
-    }
-
     public void insertCourse(Course course) {
         courseRepository.insertCourse(course);
-        loadCourses();
     }
 
     public void deleteCourse(Course course) {
         courseRepository.deleteCourse(course);
-        loadCourses();
     }
 
     public void removeStudentFromCourse(int courseId, int studentId) {

@@ -2,6 +2,8 @@ package com.example.part2;
 
 import android.app.Application;
 
+import androidx.lifecycle.LiveData;
+
 import java.util.List;
 
 public class CourseRepository {
@@ -13,7 +15,7 @@ public class CourseRepository {
         courseDao = db.courseDao();
     }
 
-    public List<Course> getAllCourses() {
+    public LiveData<List<Course>> getAllCourses() {
         return courseDao.getAllCourses();
     }
 
