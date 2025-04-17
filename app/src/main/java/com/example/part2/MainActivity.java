@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RecyclerView recyclerView = findViewById(R.id.courseRecyclerView);
-        final CourseListAdapter adapter = new CourseListAdapter(new CourseListAdapter.CourseDiff());
+        CourseListAdapter adapter = new CourseListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
