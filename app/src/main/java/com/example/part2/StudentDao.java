@@ -26,5 +26,16 @@ public interface StudentDao {
     void deleteStudent(Student student);
 
     @Insert
-    void enrollStudentInCourse(CourseStudent courseStudent);
+    void addStudentToCourse(CourseStudent courseStudent);
+
+    @Query("SELECT COUNT(*) FROM course_student " +
+            "JOIN students ON course_student.studentId = students.studentId " +
+            "WHERE course_student.courseId = :courseId AND students.user_name = :userName")
+    int isStudentEnrolled(int courseId, String userName);
+
+    @Query("SELECT studentId FROM students WHERE user_name = :userName LIMIT 1")
+    int getStudentIdByUserName(String userName);
+
+    @Query("SELECT EXISTS(SELECT 1 FROM students WHERE user_name = :userName)")
+    boolean doesStudentExist(String userName);
 }

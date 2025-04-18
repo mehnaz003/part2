@@ -32,9 +32,13 @@ public class StudentRepository {
         });
     }
 
-    public void enrollStudentInCourse(CourseStudent courseStudent) {
+    public void addStudentToCourse(CourseStudent courseStudent) {
         SystemDB.databaseWriteExecutor.execute(() -> {
-            studentDao.enrollStudentInCourse(courseStudent);
+            studentDao.addStudentToCourse(courseStudent);
         });
+    }
+
+    public int isStudentEnrolled(int courseId, String userName) {
+        return studentDao.isStudentEnrolled(courseId, userName);
     }
 }

@@ -30,7 +30,7 @@ public class StudentViewModel extends AndroidViewModel {
         studentRepository.deleteStudent(student);
     }
 
-    public void enrollStudentInCourse(CourseStudent courseStudent) {
-        studentRepository.enrollStudentInCourse(courseStudent);
+    public void addStudentToCourse(CourseStudent courseStudent) {
+        studentRepository.addStudentToCourse(courseStudent);
     }
 }

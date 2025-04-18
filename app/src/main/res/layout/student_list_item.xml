@@ -17,9 +17,9 @@
         android:layout_height="wrap_content"
         android:text="Email"/>
 
-    <TextView android:id="@+id/student_id"
+    <TextView android:id="@+id/student_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ID"/>
+        android:text="User Name"/>
 
 </LinearLayout>

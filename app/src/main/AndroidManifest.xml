@@ -27,6 +27,9 @@
         <activity
             android:name=".CourseDetailsActivity"
             android:exported="false"/>
+        <activity
+            android:name=".AddStudentActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

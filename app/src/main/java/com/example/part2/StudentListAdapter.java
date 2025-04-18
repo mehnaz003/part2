@@ -28,7 +28,7 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
         Student current = students.get(position);
         holder.nameView.setText(current.getName());
         holder.emailView.setText(current.getEmail());
-        holder.idView.setText("ID: " + current.getStudentId());
+        holder.userNameView.setText(current.getUserName());
     }
 
     @Override
@@ -42,13 +42,13 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
     }
 
     static class StudentViewHolder extends RecyclerView.ViewHolder {
-        TextView nameView, emailView, idView;
+        TextView nameView, emailView, userNameView;
 
         StudentViewHolder(View itemView) {
             super(itemView);
             nameView = itemView.findViewById(R.id.student_name);
             emailView = itemView.findViewById(R.id.student_email);
-            idView = itemView.findViewById(R.id.student_id);
+            userNameView = itemView.findViewById(R.id.student_user_name);
         }
     }
 }
