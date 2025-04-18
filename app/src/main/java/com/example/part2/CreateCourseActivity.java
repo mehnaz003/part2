@@ -32,38 +32,34 @@ public class CreateCourseActivity extends AppCompatActivity {
 
         Button buttonCreate = findViewById(R.id.button_create_course);
         buttonCreate.setOnClickListener(view -> {
-
             Intent replyIntent = new Intent();
 
-            if (TextUtils.isEmpty(editCourseCode.getText()) ||
-                    TextUtils.isEmpty(editCourseName.getText()) ||
-                    TextUtils.isEmpty(editLecturerName.getText())) {
+            String code = editCourseCode.getText().toString().trim();
+            String name = editCourseName.getText().toString().trim();
+            String lecturer = editLecturerName.getText().toString().trim();
 
+            if (TextUtils.isEmpty(code) ||
+                    TextUtils.isEmpty(name) ||
+                    TextUtils.isEmpty(lecturer)) {
+
+                Toast.makeText(this, "Please fill in all fields",
+                        Toast.LENGTH_SHORT).show();
                 setResult(Activity.RESULT_CANCELED, replyIntent);
+                
                 Log.e("CreateCourseActivity",
                         "Course creation failed: One or more fields are empty");
             }
             else {
-
-                String code = editCourseCode.getText().toString();
-                String name = editCourseName.getText().toString();
-                String lecturer = editLecturerName.getText().toString();
-
                 replyIntent.putExtra(EXTRA_COURSE_CODE, code);
                 replyIntent.putExtra(EXTRA_COURSE_NAME, name);
                 replyIntent.putExtra(EXTRA_LECTURER_NAME, lecturer);
                 setResult(Activity.RESULT_OK, replyIntent);
 
-                Toast.makeText(this, "Course created successfully!",
-                        Toast.LENGTH_SHORT).show();
-
                 Log.d("CreateCourseActivity",
                         "Course created successfully: " +
-                        code + ", " + name + ", " + lecturer);
+                                code + ", " + name + ", " + lecturer);
+                finish();
             }
-
-            finish();
         });
     }
-
 }

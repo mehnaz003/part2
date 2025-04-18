@@ -1,5 +1,7 @@
 package com.example.part2;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -8,8 +10,20 @@ import androidx.recyclerview.widget.ListAdapter;
 
 public class CourseListAdapter extends ListAdapter<Course, CourseViewHolder> {
 
-    public CourseListAdapter(@NonNull DiffUtil.ItemCallback<Course> diffCallback) {
-        super(diffCallback);
+    private final Context context;
+    private OnCourseLongClickListener longClickListener;
+
+    public CourseListAdapter(Context context) {
+        super(new CourseDiff());
+        this.context = context;
+    }
+
+    public interface OnCourseLongClickListener {
+        void onCourseLongClick(Course course);
+    }
+
+    public void setOnCourseLongClickListener(OnCourseLongClickListener listener) {
+        this.longClickListener = listener;
     }
 
     @NonNull
@@ -22,6 +36,20 @@ public class CourseListAdapter extends ListAdapter<Course, CourseViewHolder> {
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
         Course current = getItem(position);
         holder.bind(current);
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, CourseDetailsActivity.class);
+            intent.putExtra("COURSE_ID", current.getCourseId());
+            context.startActivity(intent);
+        });
+
+        holder.itemView.setOnLongClickListener(v -> {
+            if (longClickListener != null) {
+                longClickListener.onCourseLongClick(current);
+                return true;
+            }
+            return false;
+        });
     }
 
     public static class CourseDiff extends DiffUtil.ItemCallback<Course> {

@@ -18,7 +18,7 @@ public interface CourseDao {
     @Query("SELECT * FROM courses")
     LiveData<List<Course>> getAllCourses();
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     void insertCourse(Course course);
 
     @Transaction
@@ -30,4 +30,7 @@ public interface CourseDao {
 
     @Delete
     void deleteCourse(Course course);
+
+    @Query("DELETE FROM course_student WHERE courseId = :courseId")
+    void deleteEnrollmentsByCourseId(int courseId);
 }

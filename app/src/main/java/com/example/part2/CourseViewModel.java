@@ -5,7 +5,6 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
@@ -24,12 +23,19 @@ public class CourseViewModel extends AndroidViewModel {
         return allCourses;
     }
 
-    public void insertCourse(Course course) {
-        courseRepository.insertCourse(course);
+    public void insertCourse(Course course, InsertCallback callback) {
+        courseRepository.insertCourse(course, callback);
+    }
+
+    public interface InsertCallback {
+        void onSuccess();
+        void onError(Exception e);
     }
 
     public void deleteCourse(Course course) {
         courseRepository.deleteCourse(course);
+        int courseId = course.getCourseId();
+        courseRepository.deleteEnrollmentsByCourseId(courseId);
     }
 
     public void removeStudentFromCourse(int courseId, int studentId) {
@@ -39,4 +45,5 @@ public class CourseViewModel extends AndroidViewModel {
     public CourseWithStudents getCourseWithStudents(int courseId) {
         return courseRepository.getCourseWithStudents(courseId);
     }
+
 }
