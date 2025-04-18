@@ -12,6 +12,9 @@ import androidx.room.Update;
 @Dao
 public interface StudentDao {
 
+    @Query("SELECT * FROM students WHERE studentId = :studentId LIMIT 1")
+    Student getStudentById(int studentId);
+
     @Insert
     void insertStudent(Student student);
 
@@ -38,4 +41,7 @@ public interface StudentDao {
 
     @Query("SELECT EXISTS(SELECT 1 FROM students WHERE user_name = :userName)")
     boolean doesStudentExist(String userName);
+
+    @Query("DELETE FROM course_student WHERE courseId = :courseId AND studentId = :studentId")
+    void removeStudentFromCourse(int courseId, int studentId);
 }

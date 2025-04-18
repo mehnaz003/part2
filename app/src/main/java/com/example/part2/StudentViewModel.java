@@ -33,4 +33,8 @@ public class StudentViewModel extends AndroidViewModel {
     public void addStudentToCourse(CourseStudent courseStudent) {
         studentRepository.addStudentToCourse(courseStudent);
     }
+
+    public void removeStudentFromCourse(int courseId, int studentId) {
+        studentRepository.removeStudentFromCourse(courseId, studentId);
+    }
 }
