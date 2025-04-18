@@ -26,9 +26,16 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
     @Override
     public void onBindViewHolder(@NonNull StudentViewHolder holder, int position) {
         Student current = students.get(position);
+
         holder.nameView.setText(current.getName());
         holder.emailView.setText(current.getEmail());
         holder.userNameView.setText(current.getUserName());
+
+        holder.itemView.setOnClickListener(v -> {
+            if (clickListener != null) {
+                clickListener.onStudentClick(students.get(position));
+            }
+        });
     }
 
     @Override
@@ -40,6 +47,17 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
         this.students = students;
         notifyDataSetChanged();
     }
+
+    public interface OnStudentClickListener {
+        void onStudentClick(Student student);
+    }
+
+    private OnStudentClickListener clickListener;
+
+    public void setOnStudentClickListener(OnStudentClickListener listener) {
+        this.clickListener = listener;
+    }
+
 
     static class StudentViewHolder extends RecyclerView.ViewHolder {
         TextView nameView, emailView, userNameView;

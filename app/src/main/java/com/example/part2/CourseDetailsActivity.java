@@ -44,6 +44,12 @@ public class CourseDetailsActivity extends AppCompatActivity {
         courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
         loadCourseDetails(courseId);
 
+        adapter.setOnStudentClickListener(student -> {
+            Intent intent = new Intent(this, StudentDetailsActivity.class);
+            intent.putExtra("studentId", student.getStudentId());
+            startActivity(intent);
+        });
+
         FloatingActionButton fab = findViewById(R.id.fab_add_student);
         fab.setOnClickListener(v -> {
             Intent intent = new Intent(this, AddStudentActivity.class);
