@@ -5,6 +5,10 @@ public class StudentRepository {
 
     private final StudentDao studentDao;
 
+    public Student getStudentById(int studentId) {
+        return studentDao.getStudentById(studentId);
+    }
+
     public StudentRepository(Application application) {
         SystemDB db = SystemDB.getDatabase(application);
         studentDao = db.studentDao();
@@ -40,5 +44,11 @@ public class StudentRepository {
 
     public int isStudentEnrolled(int courseId, String userName) {
         return studentDao.isStudentEnrolled(courseId, userName);
+    }
+
+    public void removeStudentFromCourse(int courseId, int studentId) {
+        SystemDB.databaseWriteExecutor.execute(() -> {
+            studentDao.removeStudentFromCourse(courseId, studentId);
+        });
     }
 }

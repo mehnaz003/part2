@@ -26,9 +26,23 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
     @Override
     public void onBindViewHolder(@NonNull StudentViewHolder holder, int position) {
         Student current = students.get(position);
+
         holder.nameView.setText(current.getName());
         holder.emailView.setText(current.getEmail());
         holder.userNameView.setText(current.getUserName());
+
+        holder.itemView.setOnClickListener(v -> {
+            if (clickListener != null) {
+                clickListener.onStudentClick(students.get(position));
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(v -> {
+            if (longClickListener != null) {
+                longClickListener.onStudentLongClick(current);
+            }
+            return true;
+        });
     }
 
     @Override
@@ -39,6 +53,27 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
     public void setStudents(List<Student> students) {
         this.students = students;
         notifyDataSetChanged();
+    }
+
+    public interface OnStudentClickListener {
+        void onStudentClick(Student student);
+    }
+
+    private OnStudentClickListener clickListener;
+
+    public void setOnStudentClickListener(OnStudentClickListener listener) {
+        this.clickListener = listener;
+    }
+
+    // For Feature 7 - Doing long click instead of tap to avoid conflict with Feature 6
+    public interface OnStudentLongClickListener {
+        void onStudentLongClick(Student student);
+    }
+
+    private OnStudentLongClickListener longClickListener;
+
+    public void setOnStudentLongClickListener(OnStudentLongClickListener listener) {
+        this.longClickListener = listener;
     }
 
     static class StudentViewHolder extends RecyclerView.ViewHolder {
